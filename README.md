@@ -64,3 +64,50 @@ DELETE /{index}/{document}/{id}
 ```
 
 Deleted documents are marked as deleted and then later purged.
+
+## Schemas
+
+Every index in Elastic Search has settings and mappings properties. Mappings contains all of the fields in the index.
+Settings contain properties such as the number of shards and replicas.
+
+## Term Query
+
+To search a specific term, use:
+
+```
+{
+  "query": {
+    "term": { "name": "honor" }
+  }
+}
+```
+
+To match all terms, use:
+
+```
+{
+  "query": {
+    "match_all": {}
+  }
+}
+```
+
+Sharding split up data into multiple sets where the number of sets is equal to the number of shards. Replicas can duplicate the same data among several different shards.
+Based on the ID of the document, Elastic Search can determine which shard to route the document to.
+
+When a document in requested, the requests are distributed among the shards in an ordered fashion (round robin).
+
+Each segment in a shard is an inverted index.
+
+## Analysis
+
+The process of taking the input words and creating an inverted index from it. You can't overwrite segments once populated.
+
+### Filters
+
+Remove stop words- the, and, etc.
+Lowercase words- case insensitive
+Stemming- get to the root of the word (i.e. swimming -> swim)
+Synonyms- words that mean the same thing
+
+Also stores the position/offset of the term in the document.
