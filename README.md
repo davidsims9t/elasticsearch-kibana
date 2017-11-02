@@ -30,3 +30,37 @@ A type is essentially a table in a RDMS.
 A document is a row in a RDMS.
 A field is a column in a RDMS.
 An index is a database in a RDMS.
+
+Indexing is the same as inserting.
+
+To insert use:
+
+```
+PUT /{index}/{document}/{id}
+{
+  "field1": "value",
+  "field2": "value"
+}
+```
+
+When updating, the version field is incremented.
+
+To retrieve the document, use:
+
+```
+GET /{index}/{document}/{id}
+```
+
+To see if the document exists, use:
+
+```
+HEAD /{index}/{document}/{id}
+```
+
+To delete the document, use:
+
+```
+DELETE /{index}/{document}/{id}
+```
+
+Deleted documents are marked as deleted and then later purged.
