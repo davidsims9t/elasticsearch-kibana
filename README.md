@@ -111,3 +111,29 @@ Stemming- get to the root of the word (i.e. swimming -> swim)
 Synonyms- words that mean the same thing
 
 Also stores the position/offset of the term in the document.
+
+## Data Types
+
+To define custom types for fields, use:
+
+```
+PUT /customers/_mapping
+{
+  "properties": {
+    "name": {
+      "type": "string",
+      "analyzer": "standard"
+    }
+  }
+}
+```
+
+Data Types for document fields:
+
+```
+String fields: text, keyword
+Numeric fields: long, integer, short, byte, double, float
+Date fields: text, keyword
+True/false fields: boolean
+Binary fields: binary
+```
