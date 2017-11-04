@@ -137,3 +137,63 @@ Date fields: text, keyword
 True/false fields: boolean
 Binary fields: binary
 ```
+
+You can set the dynamic field to be false means that unmarked data that has not been defined will be ignored. A strict setting means that the unmarked data will cause an error to throw an error.
+
+The simple analyzer splits on whitespace and only matches characters.
+The standard analyzer splits on whitespace and matches entire words.
+
+You can define your own analyzers by specifying the tokens and filters.
+
+### DSL
+
+Each DSL component can contain a query and a filter context.
+
+```
+{
+  "match": {"name": "term"}
+}
+```
+
+When searching the score displays how relevant the search is.
+
+To ensure a field exists on a document use:
+
+```
+{
+  "exists": {"field": "name"}
+}
+```
+
+You can use multiple matching criteria by using:
+
+```
+{
+  "bool": {
+    "must": [
+      {"match": {"name": "name"}},
+      {"match": {"name": "name"}}
+    ],
+    "must_not": [
+      {"match": {"name": "name"}},
+      {"match": {"name": "name"}}
+    ],
+    "should": [
+      {"match": {"name": "name"}},
+      {"match": {"name": "name"}}
+    ]
+  }
+}
+```
+
+To match a phase use:
+
+```
+{
+  "query": {
+    "match_phrase": {
+      "name": "words"
+    }
+  }
+}
+```
