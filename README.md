@@ -197,3 +197,18 @@ To match a phase use:
   }
 }
 ```
+
+To do a range query use:
+
+```
+{
+  "query": {
+    "range": {
+      "number": {
+        "gte": 10,
+        "lte": 20
+      }
+    }
+  }
+}
+```
