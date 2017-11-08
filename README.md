@@ -212,3 +212,52 @@ To do a range query use:
   }
 }
 ```
+
+Everything in the query context will result in a relevancy score. The more filters that match a document, the higher relevancy it will have.
+
+You can boost the relevancy score of a field by using by using a ^2 after the field.
+
+### Pagination
+
+```
+{
+  "from": 0,
+  "size": 5
+}
+```
+
+### Sorting
+
+```
+{
+  "sort": [
+    {"price": {"order": "desc"}}
+  ]
+}
+```
+
+### Aggregation
+
+```
+{
+  "aggs": {
+    "popular_cars": {
+      "terms": {
+        "field": "make.keyword"
+      }
+    },
+    "avg_price": {
+      "avg": {
+        "field": "price"
+      }
+    },
+    "max_price": {
+      "max": {
+        "field": "price"
+      }
+    }
+  }
+}
+```
+
+Returns aggregations for a values in an index. Avg returns the average price for the category (i.e. average car price). Min/max returns the minimum or maximum price. 
