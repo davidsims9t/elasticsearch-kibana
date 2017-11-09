@@ -260,4 +260,30 @@ You can boost the relevancy score of a field by using by using a ^2 after the fi
 }
 ```
 
-Returns aggregations for a values in an index. Avg returns the average price for the category (i.e. average car price). Min/max returns the minimum or maximum price. 
+Returns aggregations for a values in an index. Avg returns the average price for the category (i.e. average car price). Min/max returns the minimum or maximum price.
+
+To generate statistics you can use:
+
+```
+{
+  "aggs": {
+    "popular_cars": {
+      "terms": {
+        "field": "make.keyword"
+      },
+      "aggs": {
+        "stats_on_price": {
+          "stats": {
+            "field": "price"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Buckets are based on a particular query.
+Metrics are based on the metrics returned from the bucket.
+
+
