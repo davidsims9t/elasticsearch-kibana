@@ -145,7 +145,7 @@ The standard analyzer splits on whitespace and matches entire words.
 
 You can define your own analyzers by specifying the tokens and filters.
 
-### DSL
+## DSL
 
 Each DSL component can contain a query and a filter context.
 
@@ -217,7 +217,7 @@ Everything in the query context will result in a relevancy score. The more filte
 
 You can boost the relevancy score of a field by using by using a ^2 after the field.
 
-### Pagination
+## Pagination
 
 ```
 {
@@ -226,7 +226,7 @@ You can boost the relevancy score of a field by using by using a ^2 after the fi
 }
 ```
 
-### Sorting
+## Sorting
 
 ```
 {
@@ -236,7 +236,7 @@ You can boost the relevancy score of a field by using by using a ^2 after the fi
 }
 ```
 
-### Aggregation
+## Aggregation
 
 ```
 {
@@ -286,4 +286,35 @@ To generate statistics you can use:
 Buckets are based on a particular query.
 Metrics are based on the metrics returned from the bucket.
 
+## Logstash
 
+For data ingestion. To configure use:
+
+logstash.conf
+```
+input {
+  file {
+    path => "/"
+    start_position => "beginning"
+    sincedb_path => "/dev/null"
+  }
+}
+filter {
+  csv {
+    seperator => ","
+    columns => []
+  }
+  mutate {
+    convert => ["mileage", "integer"]
+  }
+}
+output {
+  elasticsearch { hosts => ["localhost:9200"] }
+  stdout { codec => rubydebug }
+}
+```
+
+To run it use:
+```
+bin/logstash -f logstash.conf
+```
