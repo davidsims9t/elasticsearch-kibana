@@ -309,8 +309,12 @@ filter {
   }
 }
 output {
-  elasticsearch { hosts => ["localhost:9200"] }
-  stdout { codec => rubydebug }
+  elasticsearch { 
+    hosts => ["localhost:9200"]
+    index => "cars"
+    document_type => "sold_cars"
+  }
+  stdout { }
 }
 ```
 
